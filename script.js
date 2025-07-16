@@ -13,8 +13,9 @@ const audioPausa = new Audio('/sons/pause.mp3');
 const audioTempoFinalizado = new Audio('./sons/beep.mp3');
 const iniciarOuPausarBtn = document.querySelector('#start-pause span');
 const iniciarOuPausarIcone = document.querySelector('.app__card-primary-butto-icon');
+const tempoNaTela = document.querySelector('#timer');
 
-let tempoDecorridoEmSegundos = 5;
+let tempoDecorridoEmSegundos = 1500;
 let intervaloId = null
 
 musica.loop = true;
@@ -66,16 +67,16 @@ function alterarContexto(contexto) {
   }
 }
 
-const contagemRegressiva = () =>{
-  if (tempoDecorridoEmSegundos <= 0){
+const contagemRegressiva = () => {
+  if (tempoDecorridoEmSegundos <= 0) {
     audioTempoFinalizado.play()
     alert('Tempo finalizado!')
     zerar()
     return
   }
-    
-  tempoDecorridoEmSegundos -=1
-  console.log('Temporizador: ' + tempoDecorridoEmSegundos)
+
+  tempoDecorridoEmSegundos -= 1
+  mostrarTempo()
 
 }
 
@@ -95,9 +96,14 @@ function iniciarOuPausar() {
 
 function zerar() {
   clearInterval(intervaloId)
-  iniciarOuPausarBtn.textContent ='Começar';
-   iniciarOuPausarIcone.setAttribute('src', `/imagens/play_arrow.png`)
+  iniciarOuPausarBtn.textContent = 'Começar';
+  iniciarOuPausarIcone.setAttribute('src', `/imagens/play_arrow.png`)
   intervaloId = null
- 
-
 }
+
+function mostrarTempo() {
+  const tempo = tempoDecorridoEmSegundos;
+  tempoNaTela.innerHTML = `${tempo}`
+}
+
+mostrarTempo()
