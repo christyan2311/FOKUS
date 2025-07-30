@@ -8,7 +8,7 @@ const ulTarefas = document.querySelector('.app__section-task-list')
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []
 
 function atualizarTarefas() {
-     localStorage.setItem('tarefas', JSON.stringify(tarefas))
+    localStorage.setItem('tarefas', JSON.stringify(tarefas))
 }
 
 function criarElementoTarefa(tarefa) {
@@ -32,10 +32,14 @@ function criarElementoTarefa(tarefa) {
     botao.classList.add('app_button-edit')
 
     botao.onclick = () => {
+        debugger
         const novaDescricao = prompt("Qual é o novo nome da tarefa")
-        novaDescricao.textContent = novaDescricao
-        tarefa.descricao = novaDescricao
-        atualizarTarefas()
+        console.log("Nova descrição:", novaDescricao)
+        if (novaDescricao) {
+            novaDescricao.textContent = novaDescricao
+            tarefa.descricao = novaDescricao
+            atualizarTarefas()
+        }
     }
 
     const imagemBotao = document.createElement('img')
@@ -47,7 +51,7 @@ function criarElementoTarefa(tarefa) {
     li.append(botao)
 
     return li
-}   
+}
 
 btnAdicionarTarefa.addEventListener('click', () => {
     formAdicionarTarefa.classList.toggle('hidden')
